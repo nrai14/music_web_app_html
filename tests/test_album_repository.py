@@ -14,7 +14,7 @@ def test_get_all_albums(db_connection): # See conftest.py to learn what `db_conn
     # Assert on the results
     assert albums == [
         Album(1, "Hypnotised", 1980, 1),
-        
+        Album(2, "Rumours", 1977, 2)
     ]
 
 """
@@ -25,10 +25,23 @@ def test_create_album(db_connection):
     db_connection.seed("seeds/album_table.sql")
     repository = AlbumRepository(db_connection)
 
-    repository.create(Album(None, "Divide", 2017, 2))
+    repository.create(Album(None, "Divide", 2017, 3))
 
     result = repository.all()
     assert result == [
         Album(1, "Hypnotised", 1980, 1),
-        Album(2, "Divide", 2017, 2)
+        Album(2, "Rumours", 1977, 2),
+        Album(3, "Divide", 2017, 3)
     ]
+
+def test_find_by_id(db_connection):
+    db_connection.seed("seeds/album_table.sql")
+    repository = AlbumRepository(db_connection)
+
+    result = repository.getbyID(2)
+    print(result)
+    assert result == [
+        Album(2, "Rumours", 1977, 2)
+    ]
+    
+    

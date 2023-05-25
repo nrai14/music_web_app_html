@@ -18,3 +18,4 @@ CREATE TABLE albums (
 
 -- Finally, we add any records that are needed for the tests to run
 INSERT INTO albums (title, release_year, artist_id) VALUES ('Hypnotised', 1980, 1);
+INSERT INTO albums (title, release_year, artist_id) VALUES ('Rumours', 1977, 2)

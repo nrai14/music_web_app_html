@@ -20,7 +20,16 @@ class AlbumRepository:
         return None
     
     # Returns row that corresponds to the whole album 
-    def findbyID(self, id):
-        self._connection.execute('SELECT * from albums WHERE id = %s', [id])
-        return 
+    # def findbyID(self, id):
+    #     self._connection.execute('SELECT * from albums WHERE id = %s', [id])
+    #     print("this is the album print")
+    #     return f"{self.title}{self.release_year})"
 
+    def getbyID(self, id):
+        rows = self._connection.execute(f'SELECT * from albums WHERE id = {id}', [])
+        # %s as well 
+        albums = []
+        for row in rows:
+            item = Album(row["id"], row["title"], row["release_year"], row["artist_id"])
+            albums.append(item)
+        return albums
