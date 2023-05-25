@@ -31,12 +31,12 @@ def get_emoji():
 # def get_albums():
 #     return render_template('albums.html', album='Hypnotised')
 
-@app.route('/albums')
+@app.route('/albums', methods=['GET'])
 def get_albums():
     connection = get_flask_database_connection(app)
     repository = AlbumRepository(connection)
     albums = repository.all()
-    return render_template("albums.html", albums=albums)
+    return render_template('albums.html', albums=albums)
 
 # anything albums / something is going to be handled by the method underneath this line
 @app.route('/albums/<id>')
