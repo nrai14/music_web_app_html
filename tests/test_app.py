@@ -34,4 +34,12 @@ def test_get_albums(page, test_web_address, db_connection):
 
 def test_get_by_id(page, test_web_address, db_connection):
     db_connection.seed("seeds/album_table.sql")
-    page.goto(f"http://{test_web_address}/albums/<id>")
+    page.goto(f"http://{test_web_address}/albums/2")
+    h2_tags = page.locator("h2")
+    paragraph_tags = page.locator("p")
+    expect(h2_tags).to_have_text([
+        'Rumours'
+    ])
+    expect(paragraph_tags).to_have_text([
+        '1977'
+    ])

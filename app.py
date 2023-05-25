@@ -43,8 +43,8 @@ def get_albums():
 def get_album(id):
     connection = get_flask_database_connection(app)
     repository = AlbumRepository(connection)
-    album = repository.findbyID(id)
-    
+    album = repository.getbyID(id)
+    return render_template("albums.html", albums=album)
     # Return html with album details
 
 
