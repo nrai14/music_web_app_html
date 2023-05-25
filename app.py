@@ -38,6 +38,14 @@ def get_albums():
     albums = repository.all()
     return render_template("albums.html", albums=albums)
 
+# anything albums / something is going to be handled by the method underneath this line
+@app.route('/albums/<id>')
+def get_album(id):
+    connection = get_flask_database_connection(app)
+    repository = AlbumRepository(connection)
+    album = repository.findbyID(id)
+    
+    # Return html with album details
 
 
 

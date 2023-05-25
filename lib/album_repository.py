@@ -19,5 +19,8 @@ class AlbumRepository:
         self._connection.execute('INSERT INTO albums (title, release_year, artist_id) VALUES (%s, %s, %s)', [album.title, album.release_year, album.artist_id])
         return None
     
+    # Returns row that corresponds to the whole album 
+    def findbyID(self, id):
+        self._connection.execute('SELECT * from albums WHERE id = %s', [id])
+        return 
 
-    
