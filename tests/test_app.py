@@ -18,19 +18,27 @@ def test_get_emoji(page, test_web_address): # Note new parameters
     expect(strong_tag).to_have_text(":)")
 
 # === End Example Code ===
+def test_get_home(page, test_web_address, db_connection):
+    db_connection.seed("seeds/album_table.sql")
+    page.goto(f"http://{test_web_address}/home")
+    h1_tags = page.locator("h1")
+    a_tags = page.locator("a")
+    expect(h1_tags).to_have_text([
+        'Albums'
+    ])
+    expect(a_tags).to_have_text([
+        'Click me to go to albums list!'
+    ])
 
 def test_get_albums(page, test_web_address, db_connection):
     db_connection.seed("seeds/album_table.sql")
     page.goto(f"http://{test_web_address}/albums")
     h2_tags = page.locator("h2")
-    page.screenshot(path="screenshot.png", full_page=True)
-    paragraph_tags = page.locator("p")
+    # page.screenshot(path="screenshot.png", full_page=True)
     expect(h2_tags).to_have_text([
         'Hypnotised','Rumours'
     ])
-    expect(paragraph_tags).to_have_text([
-        '1980','1977'
-    ])
+    
 
 def test_get_by_id(page, test_web_address, db_connection):
     db_connection.seed("seeds/album_table.sql")
@@ -40,6 +48,19 @@ def test_get_by_id(page, test_web_address, db_connection):
     expect(h2_tags).to_have_text([
         'Rumours'
     ])
-    expect(paragraph_tags).to_have_text([
-        '1977'
+
+def test_get_by_release(page, test_web_address, db_connection):
+    db_connection.seed("seeds/album_table.sql")
+    page.goto(f"http://{test_web_address}/albums/2/released")
+    h1_tags = page.locator("h1")
+    h2_tags = page.locator("h2")
+    p_tags = page.locator("p")
+    expect(h1_tags).to_have_text([
+        'Album details'
+    ])
+    expect(h2_tags).to_have_text([
+        'Rumours'
+    ])
+    expect(p_tags).to_have_text([
+        'Released: 1977'
     ])
