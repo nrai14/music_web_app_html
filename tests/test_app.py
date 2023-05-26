@@ -64,3 +64,23 @@ def test_get_by_release(page, test_web_address, db_connection):
     expect(p_tags).to_have_text([
         'Released: 1977'
     ])
+
+def test_get_artists(page, test_web_address, db_connection):
+    db_connection.seed("seeds/artist_table.sql")
+    page.goto(f"http://{test_web_address}/artists")
+    h2_tags = page.locator("h2")
+    expect(h2_tags).to_have_text([
+        'Pixies', 'ABBA', 'Taylor Swift', 'Nina Simone'
+    ])
+
+def test_get_by_artist_id(page, test_web_address, db_connection):
+    db_connection.seed("seeds/artist_table.sql")
+    page.goto(f"http://{test_web_address}/artists/1")
+    h2_tags = page.locator("h2")
+    paragraph_tags = page.locator("p")
+    expect(h2_tags).to_have_text([
+        'Pixies'
+    ])
+    expect(paragraph_tags).to_have_text([
+        'Indie'
+    ])

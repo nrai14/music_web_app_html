@@ -28,3 +28,13 @@ def test_create_artist(db_connection):
         Artist(4, "Nina Simone", "Jazz"),
         Artist(5, "Wild Nothing", "Indie")
     ]
+
+def test_find_by_artist_id(db_connection):
+    db_connection.seed("seeds/artist_table.sql")
+    repository = ArtistRepository(db_connection)
+
+    result = repository.findbyartistID(1)
+    assert result == [
+        Artist(1, "Pixies", "Indie")
+    ]
+    

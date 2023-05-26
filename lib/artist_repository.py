@@ -17,3 +17,12 @@ class ArtistRepository:
     def create(self, artist):
         self._connection.execute('INSERT INTO artists (name, genre) VALUES (%s, %s)', [artist.name, artist.genre])
         return None
+    
+    def findbyartistID(self, id):
+        rows = self._connection.execute(f'SELECT * from artists WHERE id = {id}', [])
+        # %s as well 
+        artists = []
+        for row in rows:
+            item = Artist(row["id"], row["name"], row["genre"])
+            artists.append(item)
+        return artists

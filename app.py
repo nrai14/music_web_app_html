@@ -77,20 +77,35 @@ def post_albums():
 def get_artists():
     connection = get_flask_database_connection(app)
     repository = ArtistRepository(connection)
-    return "\n".join(
-        f"{artist}" for artist in repository.all()
-    )
-    
-@app.route('/artists', methods=['POST'])
-def post_artists():
+    artist = repository.all()
+    return render_template('artists.html', artists=artist)
+
+@app.route('/artists/<id>', methods=['GET'])
+def get_single_artist(id):
     connection = get_flask_database_connection(app)
     repository = ArtistRepository(connection)
-    artist = Artist(
-        None,
-        request.form['name'],
-        request.form['genre'])
-    repository.create(artist)
-    return '',200
+    artist = repository.findbyartistID(id)
+    return render_template("single_artist.html", artists=artist)
+    # Return html with album details
+
+# @app.route('/artists', methods=['GET'])
+# def get_artists():
+#     connection = get_flask_database_connection(app)
+#     repository = ArtistRepository(connection)
+#     return "\n".join(
+#         f"{artist}" for artist in repository.all()
+#     )
+    
+# @app.route('/artists', methods=['POST'])
+# def post_artists():
+#     connection = get_flask_database_connection(app)
+#     repository = ArtistRepository(connection)
+#     artist = Artist(
+#         None,
+#         request.form['name'],
+#         request.form['genre'])
+#     repository.create(artist)
+#     return '',200
 
 
 

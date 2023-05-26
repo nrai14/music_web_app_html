@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Specific Artist</title>
+    </head>
+    <body>
+        <h1>Artist details</h1>
+
+        {% for artist in artists %}
+        <article>
+            <h2>{{artist.name}}</h2> 
+            <p>{{artist.genre}}</p>
+        </article>
+        {% endfor %}
+    </body>
+</html>
