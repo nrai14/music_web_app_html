@@ -38,6 +38,9 @@ def get_albums():
     albums = repository.all()
     return render_template('albums.html', albums=albums)
 
+@app.route('/home', methods=['GET'])
+def go_home():
+    return render_template('home.html', home='Click me to go to albums list!')
 # anything albums / something is going to be handled by the method underneath this line
 @app.route('/albums/<id>')
 def get_album(id):
@@ -47,6 +50,13 @@ def get_album(id):
     return render_template("albums.html", albums=album)
     # Return html with album details
 
+# Route for single album details
+@app.route('/albums/<id>/released')
+def get_single(id):
+    connection = get_flask_database_connection(app)
+    repository = AlbumRepository(connection)
+    album = repository.getbyID(id)
+    return render_template("single_album.html", albums=album)
 
 
 @app.route('/albums', methods=['POST'])

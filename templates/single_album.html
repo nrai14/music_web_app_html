@@ -2,18 +2,17 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Album List</title>
+        <title>Specific Album</title>
     </head>
     <body>
-        <h1>Albums</h1>
+        <h1>Album details</h1>
 
         {% for album in albums %}
         <article>
-            <a href="/albums/{{album.id}}/released"><h2>{{album.title}}</h2> </a>
-            <!-- <p>{{album.release_year}}</p> -->
+            <h2>{{album.title}}</h2> </a>
+            <p>Released: {{album.release_year}}</p>
         </article>
         {% endfor %}
-
         <!-- <a href="/albums/1">Hypnotised</a>
         <a href="/albums/2">Rumours</a> -->
         <a href="/home">Back to home</a> 
